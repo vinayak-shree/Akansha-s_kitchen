@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import os
+import pymongo
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -93,6 +94,13 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# Render will automatically pass 'MONGO_URI' here when the server spins up
+MONGO_URI = os.environ.get('MONGO_URI')
+MONGO_CLIENT = pymongo.MongoClient(MONGO_URI)
+MONGO_DB = MONGO_CLIENT['akansha_kitchen']
+
+
+
 
 
 # Password validation
