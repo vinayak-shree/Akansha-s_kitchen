@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Logo Main Container */
+.logo-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px;
+    background: transparent;
+    user-select: none;
+}
+
+/* Base Styles for Utensils */
+.utensil {
+    position: relative;
+    width: 24px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* The Fork */
+.fork .head {
+    width: 14px;
+    height: 22px;
+    background: #ff6b35; /* Primary accent theme color */
+    border-radius: 4px 4px 12px 12px;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 2px;
+}
+
+/* Fork Tines (Cutouts) */
+.fork .head::before {
+    content: '';
+    width: 2px;
+    height: 12px;
+    background: #ffffff; /* Matches navbar/plate background */
+    border-radius: 0 0 2px 2px;
+    display: block;
+    box-shadow: 4px 0 #ffffff, -4px 0 #ffffff; /* Creates 3 distinct cutouts */
+}
+
+/* The Spoon */
+.spoon .head {
+    width: 16px;
+    height: 24px;
+    background: #ff6b35;
+    border-radius: 50% 50% 45% 45%;
+    position: relative;
+    box-shadow: inset -2px -2px 0px rgba(0,0,0,0.1); /* Subtle inner bowl depth */
+}
+
+/* Shared Elegant Handles for Fork & Spoon */
+.utensil .handle {
+    width: 4px;
+    height: 34px;
+    background: #ff6b35;
+    border-radius: 2px;
+    position: relative;
+}
+
+/* Small elegant knob at the base of the handles */
+.utensil .handle::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: #ff6b35;
+    border-radius: 50%;
+}
+
+/* The Gourmet Plate */
+.plate {
+    width: 54px;
+    height: 54px;
+    background: #ffffff;
+    border: 4px solid #ff6b35; /* Outer Rim */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(255, 107, 53, 0.15);
+}
+
+/* Inner Plate Ridge */
+.plate::before {
+    content: '';
+    width: 34px;
+    height: 34px;
+    border: 1.5px dashed rgba(255, 107, 53, 0.4);
+    border-radius: 50%;
+    position: absolute;
+}
+
+/* Glossy / Reflection highlight across the plate */
+.plate::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 50%);
+    pointer-events: none;
+}
+
+/* Subtle Hover Animation to breathe life into the logo */
+.logo-container:hover .fork {
+    transform: translateY(-2px) rotate(-5deg);
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover .spoon {
+    transform: translateY(-2px) rotate(5deg);
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover .plate {
+    transform: scale(1.04);
+    transition: transform 0.3s ease;
+}
+
+/* Smooth reset when mouse leaves */
+.utensil, .plate {
+    transition: transform 0.3s ease;
+}
+    </style>
+</head>
+<body>
+    <a class="navbar-brand" href="/home/">
+    <!-- Pure CSS Logo Elements -->
+    <div class="logo-container">
+        <div class="utensil fork">
+            <div class="head"></div>
+            <div class="handle"></div>
+        </div>
+        <div class="plate"></div>
+        <div class="utensil spoon">
+            <div class="head"></div>
+            <div class="handle"></div>
+        </div>
+    </div>
+    <!-- Brand Text -->
+    <span>Akansha's</span>Kitchen
+</a>
+</body>
+</html>

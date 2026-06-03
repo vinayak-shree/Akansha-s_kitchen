@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+
+    <style>
+              body{
+            background-image: url("{% static 'images/bg.png' %}");
+                }
+ 
+                .x{
+                    margin-top: 10rem;
+                      animation-name: grow;
+  animation-duration: 15s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+                }
+                @keyframes grow {
+                    0%{
+                        transform: rotate(0deg);
+                    }
+                    25%{
+                        transform: rotate(100deg);
+                    }
+                    50%{
+                        transform: rotate(200deg);
+
+                    }
+                    75%{
+                        transform: rotate(280deg);
+
+                    }
+                    100%{
+                        transform: rotate(360deg);
+
+                    }
+                }
+    </style>
+</head>
+
+<body>
+
+    
+  <nav class="navbar navbar-expand-lg custom-navbar sticky-top">
+    <div class="container-fluid">
+      
+      <!-- FIXED: Cleaned up messy nested tags and unclosed comments here -->
+      <a class="navbar-brand" href="/home/">
+          <div class="logo-container">
+              <div class="utensil fork">
+                  <div class="head"></div>
+                  <div class="handle"></div>
+              </div>
+              <div class="plate"></div>
+              <div class="utensil spoon">
+                  <div class="head"></div>
+                  <div class="handle"></div>
+              </div>
+          </div>
+          <span>Akansha's</span>Kitchen
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact us</a>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categories
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Add Recipe</a></li>
+              <li><a class="dropdown-item" href="#">Desserts</a></li>
+              <li><a class="dropdown-item" href="#">Beverages</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Quick 15-Min Meals</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About Us</a>
+          </li>
+        </ul>
+        
+        <form class="d-flex gap-2" role="search">
+          <!-- <input class="form-control search-input" type="search" placeholder="Search delicious recipes..." aria-label="Search"/> -->
+          <a class="btn btn-recipe" type="submit">Admin</a>
+        </form>
+      </div>
+      
+    </div>
+  </nav>
+
+
+<div class="about-content" style="width: 20rem;">
+    About Us
+
+Welcome to Akansha's Kitchen, where every dish is prepared with passion, freshness, and authentic flavors. We believe that great food brings people together, which is why we focus on quality ingredients and traditional recipes that create memorable dining experiences.
+
+Whether you're craving delicious snacks, refreshing beverages, street food favorites, or festive special dishes, our kitchen serves food made with care and love. Our goal is to provide tasty, hygienic, and affordable meals that feel just like home.
+
+Why Choose Us?
+<br>
+🍽️ Freshly Prepared Food
+<br>
+❤️ Made with Love and Care
+<br>
+🌿 Quality Ingredients
+<br>
+⭐ Authentic Taste
+<br>
+🏠 Home-Style Cooking
+</div>
+    <div class="image">
+        <a href="/index.html"><img src="kitchen-img.png" style="height: 35rem; width: 35rem; margin-left: 35rem; margin-top: 0rem; border-radius: 300px;"></a>
+    </div>
+    <div class="round" style="top: 0;">
+        <i>
+            For more update follow our channel , like share and subscribe
+        </i>
+    </div>
+</body>
+</html>

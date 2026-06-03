@@ -1,0 +1,498 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Akansha's Kitchen</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Global Background Engine (Applied directly to the complete document body viewport) */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("{% static 'images/bg.png' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* --- NAVIGATION DESIGN & FLEX ALIGNMENTS --- */
+        .custom-navbar {
+            background-color: #ffffff !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            padding: 0.6rem 1.5rem;
+        }
+
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: #ff6b35 !important;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .navbar-brand span { color: #2b2d42; }
+
+        .logo-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: 45px;
+            user-select: none;
+        }
+
+        .utensil {
+            position: relative;
+            width: 14px;
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .fork .head {
+            width: 12px;
+            height: 16px;
+            background: #ff6b35;
+            border-radius: 3px 3px 6px 6px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .fork .head::before {
+            content: '';
+            width: 2px;
+            height: 9px;
+            background: #ffffff;
+            border-radius: 0 0 1px 1px;
+            display: block;
+            box-shadow: 3px 0 #ffffff, -3px 0 #ffffff;
+        }
+
+        .spoon .head {
+            width: 12px;
+            height: 16px;
+            background: #ff6b35;
+            border-radius: 50% 50% 45% 45%;
+        }
+
+        .utensil .handle {
+            width: 3px;
+            height: 24px;
+            background: #ff6b35;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .utensil .handle::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background: #ff6b35;
+            border-radius: 50%;
+        }
+
+        .plate {
+            width: 36px;
+            height: 36px;
+            background: #ffffff;
+            border: 3px solid #ff6b35;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .plate::before {
+            content: '';
+            width: 22px;
+            height: 22px;
+            border: 1px dashed rgba(255, 107, 53, 0.4);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .navbar-brand:hover .fork { transform: translateY(-2px) rotate(-10deg); }
+        .navbar-brand:hover .spoon { transform: translateY(-2px) rotate(10deg); }
+        .navbar-brand:hover .plate { transform: scale(1.08); }
+
+        .custom-navbar .nav-link {
+            color: #4a4e69 !important;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 1.2rem !important;
+            transition: all 0.25s ease;
+        }
+
+        .custom-navbar .nav-link:hover,
+        .custom-navbar .nav-link.active {
+            color: #ff6b35 !important;
+        }
+
+        .search-input {
+            border: 2px solid #e2e8f0;
+            border-radius: 30px;
+            padding: 0.5rem 1.2rem;
+            background-color: #f8fafc;
+            min-width: 240px;
+        }
+
+        .search-input:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
+            background-color: #ffffff;
+            outline: none;
+        }
+
+        .btn-recipe {
+            background-color: #ff6b35;
+            color: #ffffff;
+            font-weight: 600;
+            border-radius: 30px;
+            padding: 0.5rem 1.5rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-recipe:hover {
+            background-color: #e05320;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
+        }
+
+        /* --- CONTACT CONTENT LAYOUT SYSTEM --- */
+        .landing_page {
+            width: 100%;
+        }
+
+        .landing_page * {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .landing_page .responsive-container-block {
+            min-height: 75px;
+            height: fit-content;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            justify-content: flex-start;
+        }
+
+        .landing_page .text-blk {
+            margin: 0;
+            line-height: 25px;
+        }
+
+        .landing_page .responsive-cell-block {
+            min-height: 75px;
+        }
+
+        .landing_page .responsive-container-block.container {
+            max-width: 1200px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+            position: relative;
+            gap: 20px;
+        }
+
+        /* Updated Modern Glass Backdrop Overlay for Form Box */
+        .landing_page .form-box {
+            background-color: rgba(21, 22, 23, 0.92);
+            color: white;
+            padding: 40px 35px;
+            max-width: 506px;
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .landing_page .text-blk.contactus-head {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            line-height: 42px;
+            font-weight: 700;
+            color: #ff6b35;
+        }
+
+        .landing_page .text-blk.contactus-subhead {
+            color: #d4d4d4;
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+
+        .landing_page .form-wrapper .responsive-container-block {
+            gap: 15px;
+        }
+
+        .landing_page .input, 
+        .landing_page .textinput {
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px;
+            background-color: #212223;
+            border: 1px solid #3d3e40;
+            border-radius: 8px;
+            color: #ffffff;
+            transition: border-color 0.3s ease;
+        }
+
+        .landing_page .input:focus, 
+        .landing_page .textinput:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+
+        .landing_page .input {
+            height: 50px;
+        }
+
+        .landing_page .textinput {
+            height: 150px;
+            resize: none;
+        }
+
+        .landing_page .submit-btn {
+            width: 100%;
+            height: 52px;
+            border-radius: 30px;
+            background-color: #ff6b35;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            border: none;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(255, 107, 53, 0.2);
+        }
+
+        .landing_page .submit-btn:hover {
+            background-color: #e05320;
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .landing_page .responsive-cell-block.right-one {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .landing_page .responsive-cell-block.left-one {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            color: white;
+            flex: 1;
+        }
+
+        .landing_page .text-blk.section-subhead {
+            margin-bottom: 40px;
+            max-width: 420px;
+            font-size: 20px;
+            color: #e2e8f0;
+        }
+
+        .landing_page .text-blk.section-head {
+            font-family: 'Playfair Display', serif;
+            font-size: 46px;
+            line-height: 58px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            max-width: 450px;
+        }
+
+        .landing_page .icons-container {
+            max-width: 300px;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .landing_page .share-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .landing_page .share-icon:hover {
+            background: #ff6b35;
+            transform: translateY(-3px);
+        }
+
+        .landing_page .img {
+            width: 22px;
+            height: 22px;
+            filter: brightness(0) invert(1);
+        }
+
+        .landing_page .responsive-container-block.big-container {
+            padding: 0 50px;
+            position: relative;
+        }
+
+        /* Responsive Breakpoints Layout Engine */
+        @media (max-width: 992px) {
+            .landing_page .responsive-container-block.container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                margin-top: 40px;
+            }
+            .landing_page .responsive-cell-block.left-one {
+                justify-content: center;
+                margin-bottom: 40px;
+            }
+            .landing_page .icons-container {
+                margin: 0 auto;
+            }
+            .landing_page .text-blk.section-head {
+                font-size: 34px;
+                line-height: 44px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .landing_page .responsive-container-block.big-container {
+                padding: 0 20px;
+            }
+            .landing_page .form-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg custom-navbar sticky-top">
+    <div class="container-fluid">
+      
+      <a class="navbar-brand" href="/home/">
+          <div class="logo-container">
+              <div class="utensil fork"><div class="head"></div><div class="handle"></div></div>
+              <div class="plate"></div>
+              <div class="utensil spoon"><div class="head"></div><div class="handle"></div></div>
+          </div>
+          <span>Akansha's</span>Kitchen
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/home/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/contact/">Contact us</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/aboutt/">About Us</a>
+          </li>
+        </ul>
+        
+        <form class="d-flex gap-2 align-items-center" role="search">
+          <!-- <input class="form-control search-input" type="search" placeholder="Search delicious recipes..." aria-label="Search"/> -->
+          <a href="/admin_login/" class="btn btn-recipe" type="submit">Admin</a>
+        </form>
+      </div>
+      
+    </div>
+  </nav>
+
+  <div class="landing_page">
+    <div class="responsive-container-block big-container">
+      <div class="responsive-container-block container">
+        
+        <div class="responsive-cell-block left-one">
+          <div class="content-box">
+            <h1 class="text-blk section-head">
+              Do You Wanna Give Idea For another dish ??
+            </h1>
+            <p class="text-blk section-subhead">
+              Let's Go !! 
+            </p>
+            <div class="icons-container">
+              <a class="share-icon" href="#">
+                <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-twitter.png" alt="Twitter">
+              </a>
+              <a class="share-icon" href="#">
+                <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-facebook.png" alt="Facebook">
+              </a>
+              <a class="share-icon" href="#">
+                <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-google.png" alt="Google">
+              </a>
+              <a class="share-icon" href="#">
+                <img class="img" src="https://workik-widget-assets.s3.amazonaws.com/Footer1-83/v1/images/Icon-instagram.png" alt="Instagram">
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="responsive-cell-block right-one">
+          <form class="form-box">
+            <div class="container-block form-wrapper">
+              <h2 class="text-blk contactus-head">Willing Dish</h2>
+              <p class="text-blk contactus-subhead">
+                We will get back to you in 24 hours
+              </p>
+              
+              <div class="responsive-container-block">
+                <div class="w-100 mb-3">
+                  <input class="input" name="FirstName" placeholder="First Name" type="text" required>
+                </div>
+                <div class="w-100 mb-3">
+                  <input class="input" name="LastName" placeholder="Last Name" type="text" required>
+                </div>
+                <div class="w-100 mb-3">
+                  <input class="input" name="Email" placeholder="Email" type="email" required>
+                </div>
+                <div class="w-100 mb-3">
+                  <input class="input" name="PhoneNumber" placeholder="Phone Number" type="tel">
+                </div>
+                <div class="w-100 mb-3">
+                  <textarea class="textinput" name="Message" placeholder="Type recipe details or feedback here..." required></textarea>
+                </div>
+              </div>
+              
+              <button type="submit" class="submit-btn">Foodie</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
